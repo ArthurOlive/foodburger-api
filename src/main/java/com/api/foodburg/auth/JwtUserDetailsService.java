@@ -12,7 +12,6 @@ import com.api.foodburg.services.UserService;
 
 import javax.transaction.Transactional;
 
-
 @Service
 @Transactional
 public class JwtUserDetailsService implements UserDetailsService {

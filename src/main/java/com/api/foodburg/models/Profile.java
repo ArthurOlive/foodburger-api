@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -18,7 +19,7 @@ public class Profile implements Serializable {
 
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private long id;
+    private UUID id;
     private String name;
     private LocalDate birth;
     private String document;
@@ -53,11 +54,11 @@ public class Profile implements Serializable {
         this.birth = birth;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

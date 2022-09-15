@@ -20,8 +20,10 @@ import com.api.foodburg.auth.JwtUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	private JwtUserDetailsService jwtUserDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
@@ -29,19 +31,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-	@Autowired
-	private JwtUserDetailsService jwtUserDetailsService;
-
     @Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.httpBasic();
 		httpSecurity.csrf().disable();
-
+		
 		configureEndPointAuthenticate(httpSecurity);
 		configureOpenEndPointPermissions(httpSecurity);
 	}
 
-    private void configureEndPointAuthenticate(HttpSecurity http) throws Exception {
+	private void configureEndPointAuthenticate(HttpSecurity http) throws Exception {
 		http.cors().and().csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.POST, "/api/register").permitAll()
 			.antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
@@ -67,11 +66,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder builder) throws Exception {
-		builder
-			.userDetailsService(jwtUserDetailsService)
-			.passwordEncoder(passwordEncoder());
-	}
-    
 }
+

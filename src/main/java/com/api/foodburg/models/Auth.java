@@ -1,6 +1,7 @@
 package com.api.foodburg.models;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -14,7 +15,7 @@ public class Auth implements Serializable {
 
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private long id;
+    private UUID id;
 
     @Column(unique = true)
     private String username;
@@ -35,7 +36,7 @@ public class Auth implements Serializable {
         this.password = password;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -47,8 +48,8 @@ public class Auth implements Serializable {
         return username;
     }
 
-    public long setId(long id) {
-        return id;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     @JsonIgnoreProperties

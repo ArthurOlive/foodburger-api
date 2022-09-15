@@ -8,13 +8,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class UserSystem implements Serializable {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private long id;
+    private UUID id;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Auth auth;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -25,7 +26,7 @@ public class UserSystem implements Serializable {
         return auth;
     }
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -41,7 +42,7 @@ public class UserSystem implements Serializable {
         this.auth = auth;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
